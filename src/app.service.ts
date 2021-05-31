@@ -2,12 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CsvParser, ParsedData } from 'nest-csv-parser';
 import * as fs from 'fs';
 import * as path from 'path';
-
-class Entity {
-  username: string;
-  password: string;
-  role: string;
-}
+import { User } from './entities/user';
 
 @Injectable()
 export class AppService {
@@ -22,13 +17,13 @@ export class AppService {
     const stream = fs.createReadStream(dataSrc);
     const entities: ParsedData<InstanceType<any>> = await this.csvParser.parse(
       stream,
-      Entity,
+      User,
       null,
       null,
       {
         separator: ',',
       },
     );
-    return entities;
+    return entities.list;
   }
 }
