@@ -1,4 +1,4 @@
-ID,USERNAME,PASSWORD,ROLE
-1, adam,123456,Admin
-2, eric,123456,Admin
-3, paul,123456,User
+id,username,password,role
+1,adam,123456,Admin
+2,eric,123456,Admin
+3,paul,123456,User

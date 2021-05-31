@@ -3,10 +3,14 @@ import { CsvParser, ParsedData } from 'nest-csv-parser';
 import * as fs from 'fs';
 import * as path from 'path';
 import { UserEntity } from './user/user.entity';
+import { UserService } from './user/user.service';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly csvParser: CsvParser) {}
+  constructor(
+    private readonly csvParser: CsvParser,
+    private readonly userService: UserService,
+  ) {}
 
   getHello(): string {
     return 'Hello World!';
@@ -24,6 +28,9 @@ export class AppService {
         separator: ',',
       },
     );
+    for (const user of entities.list) {
+      await this.userService.create(user);
+    }
     return entities.list;
   }
 }
